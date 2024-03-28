@@ -12,10 +12,13 @@
 # def read_item(item_id: int, q: Optional[str] = None):
 #     return {"item_id": item_id, "q": q}
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+# from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
+
+
 
 app = FastAPI()
 
@@ -23,15 +26,15 @@ app = FastAPI()
 firmware_version = "1.0.0"
 
 # Mounting static files directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Jinja2 templates directory
-templates = Jinja2Templates(directory="templates")
+# templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "version": firmware_version})
+# @app.get("/", response_class=HTMLResponse)
+# async def home(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request, "version": firmware_version})
 
 
 @app.get("/firmware/version")
@@ -60,3 +63,7 @@ async def download_bin_file():
     # For now, just returning a sample file named "example.bin"
     file_path = "example.bin"
     return FileResponse(file_path, media_type="application/octet-stream")
+
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Example</title>
+</head>
+<body>
+    <h1>Firmware Version: {{ version }}</h1>
+    <form action="/firmware/version" method="post">
+        <label for="version">Set Firmware Version:</label>
+        <input type="text" id="version" name="version">
+        <button type="submit">Submit</button>
+    </form>
+    <form action="/firmware/bin" method="post" enctype="multipart/form-data">
+        <label for="file">Upload .bin File:</label>
+        <input type="file" id="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
